@@ -1,4 +1,3 @@
-DulgtGo
-=======
+# Dulgt
 
-Dulgt can be used similar to password managers such as 1Password, but instead of storing passwords it derives them from the master password
+Dulgt is a Norwegian word for hidden or veiled. It is a way of hiding your secrets such as your login passwords. So this is just another password manager software like 1Password, KeePass or LastPass? Not quite. When using usual password managers you need to store the passwords on a file. With Dulgt passwords are generated from the information you write into it, so you can recreate your passwords on any computer.
