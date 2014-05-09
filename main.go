@@ -7,18 +7,26 @@ import (
     "fmt"
 )
 
-const keyLen = 8
+type TestVector struct {
+    P, S []byte
+    N, r, p, dklen int
+}
 
-// recommended cost parameters for interactive login in 2009
-const N = 16384
-const r = 8
-const p = 1
+var testData = []TestVector {
+    TestVector {[]byte(""), []byte(""), 16, 1, 1, 64},
+    {[]byte("password"), []byte("NaCl"), 1024, 8, 16, 64},
+    {[]byte("pleaseletmein"), []byte("SodiumChloride"), 16384, 8, 1, 64},
+    {[]byte("pleaseletmein"), []byte("SodiumChloride"), 1048576, 8, 1, 64},
+    {[]byte("mypassword"), []byte("mysalt"), 16384, 8, 1, 8},   
+}
 
-func main() {    
-    dk, _ := scrypt.Key([]byte("mypassword"), []byte("mysalt"), N, r, p, keyLen)
-    for _, v := range dk {
-        fmt.Printf("%x ", v)
-    }
-    
-    fmt.Println()
+
+func main() {
+    for _, t := range testData {
+        dk, _ := scrypt.Key(t.P, t.S, t.N, t.r, t.p, t.dklen)
+        for _, v := range dk {
+            fmt.Printf("%x ", v)
+        } 
+        fmt.Println("\n")     
+    }    
 }
