@@ -3,7 +3,6 @@ package main
 // example usage: dulgt -password=foobar -len=12 amazon
 
 import (
-	"encoding/base64"
     "code.google.com/p/go.crypto/scrypt"
     "fmt"
 )
@@ -17,7 +16,9 @@ const p = 1
 
 func main() {    
     dk, _ := scrypt.Key([]byte("mypassword"), []byte("mysalt"), N, r, p, keyLen)
-	str := base64.StdEncoding.EncodeToString(dk)
+    for _, v := range dk {
+        fmt.Printf("%x ", v)
+    }
     
-    fmt.Println(str)
+    fmt.Println()
 }
